@@ -6,7 +6,7 @@
 const locations = [
   '🏤', '🏥', '🏭', '🏢', '🏣'
 ]
-
+const death = '🦇🦇🦇🦇🦇🦇🦇🦇🦇🦇🦇🦇'
 const people = [{
   name: 'Jimbo',
   picture: '🤵',
@@ -75,35 +75,37 @@ const btn3 = document.getElementById('btn3')
 const btn4 = document.getElementById('btn4')
 const btn5 = document.getElementById('btn5')
 
-const buttons = [
-  {
-    number: btn1,
-    picture: '🏤'
-  },
-  {
-    number: btn2,
-    picture: '🏥'
-  },
-  {
-    number: btn3,
-    picture: '🏭'
-  },
-  {
-    number: btn4,
-    picture: '🏢'
-  },
-  {
-    number: btn5,
-    picture: '🏣'
-  },
-]
+let hours = 12
+
+let hunter = ''
+
+// const buttons = [
+//   {
+//     number: btn1,
+//     picture: '🏤'
+//   },
+//   {
+//     number: btn2,
+//     picture: '🏥'
+//   },
+//   {
+//     number: btn3,
+//     picture: '🏭'
+//   },
+//   {
+//     number: btn4,
+//     picture: '🏢'
+//   },
+//   {
+//     number: btn5,
+//     picture: '🏣'
+//   },
+// ]
 
 
 // !SECTION
 // NOTE this needs function added that actives when clicked
 // @ts-ignore
-// @ts-ignore
-
 
 
 // SECTION functions
@@ -125,9 +127,56 @@ function draw() {
 
 }
 
+
+
 function bite() {
-  console.log(btnEmoji)
+
+
+
+
+
+
+
 
 }
 
+function gameWin() {
+  people.forEach(p => {
+    const pEmoji = ''
+    p.picture += pEmoji
+    // @ts-ignore
+    if (pEmoji == death) {
+
+    }
+  })
+}
+
+function moveAround() {
+  people.forEach(p => {
+    const rngIndex = Math.floor(Math.random() * locations.length)
+
+    const rng = location[rngIndex]
+
+    p.location = rng
+  })
+}
+
+
+function countdown() {
+  hours - 1
+  if (hours >= 0) {
+    window.alert('The sun has risen times up')
+  }
+}
+
+function hunterHero() {
+  const rngPersonIndex = Math.floor(Math.random() * people.length)
+
+  const rngPerson = people[rngPersonIndex]
+
+  hunter = rngPerson.name
+}
+
 // !SECTION
+
+
