@@ -2,6 +2,12 @@
 
 // SECTION global variables
 
+const btn1 = document.getElementById('btn1')
+const btn2 = document.getElementById('btn2')
+const btn3 = document.getElementById('btn3')
+const btn4 = document.getElementById('btn4')
+const btn5 = document.getElementById('btn5')
+
 
 const locations = [
   '🏤', '🏥', '🏭', '🏢', '🏣'
@@ -69,43 +75,23 @@ const people = [{
 }
 ]
 
-const btn1 = document.getElementById('btn1')
-const btn2 = document.getElementById('btn2')
-const btn3 = document.getElementById('btn3')
-const btn4 = document.getElementById('btn4')
-const btn5 = document.getElementById('btn5')
-
-let hours = 12
-
-let hunter = ''
-
-// const buttons = [
-//   {
-//     number: btn1,
-//     picture: '🏤'
-//   },
-//   {
-//     number: btn2,
-//     picture: '🏥'
-//   },
-//   {
-//     number: btn3,
-//     picture: '🏭'
-//   },
-//   {
-//     number: btn4,
-//     picture: '🏢'
-//   },
-//   {
-//     number: btn5,
-//     picture: '🏣'
-//   },
-// ]
+let hours = 8
 
 
-// !SECTION
-// NOTE this needs function added that actives when clicked
+// // !SECTION
 // @ts-ignore
+btn1.addEventListener('click', bite)
+// @ts-ignore
+btn2.addEventListener('click', bite)
+// @ts-ignore
+btn3.addEventListener('click', bite)
+// @ts-ignore
+btn4.addEventListener('click', bite)
+// @ts-ignore
+btn5.addEventListener('click', bite)
+
+
+
 
 
 // SECTION functions
@@ -115,68 +101,81 @@ function draw() {
     const filteredPeople = people.filter(p => p.location == location)
     console.log(filteredPeople)
 
-    let emoji = ''
-    filteredPeople.forEach(fPeople => emoji += fPeople.location)
-    console.log(emoji)
+    const emojis = filteredPeople.map(person => person.picture)
+
     const locationElem = document.getElementById(location)
 
     // @ts-ignore
-    locationElem.innerText = emoji
+    locationElem.innerText = ''
+    emojis.forEach(emoji => {
+      // @ts-ignore
+      locationElem.innerText += emoji
+    })
   })
 
 
 }
 
+function bite(event) {
+  const victims = event.target.innerText
+  console.log(victims)
 
-
-function bite() {
-
-
-
-
-
-
-
-
+  const victimsLocated = people.filter(p => p.location == victims)
+  victimsLocated.forEach(victim => {
+    victim.picture = '🦇'
+  })
+  gameWin()
+  moveAround()
+  countdown()
+  draw()
 }
 
+
+
 function gameWin() {
+  let death = true
   people.forEach(p => {
-    const pEmoji = ''
-    p.picture += pEmoji
-    // @ts-ignore
-    if (pEmoji == death) {
+    if (p.picture !== '🦇') {
+      death = false
 
     }
   })
+  if (death) {
+    window.alert("All Victims Have Been Turned. YOU WIN!")
+  }
 }
 
 function moveAround() {
   people.forEach(p => {
-    const rngIndex = Math.floor(Math.random() * locations.length)
-
-    const rng = location[rngIndex]
-
-    p.location = rng
+    const rndLocationIdex = Math.floor(Math.random() * locations.length)
+    const rndLocation = locations[rndLocationIdex]
+    p.location = rndLocation
   })
 }
 
-
 function countdown() {
-  hours - 1
-  if (hours >= 0) {
-    window.alert('The sun has risen times up')
+  hours--
+  console.log(hours)
+  if (!hours) {
+    alert('Time is up, sun is shining, and you are dead')
   }
 }
 
-function hunterHero() {
-  const rngPersonIndex = Math.floor(Math.random() * people.length)
 
-  const rngPerson = people[rngPersonIndex]
+// function hunterHero() {
+//   const rngPersonIndex = Math.floor(Math.random() * people.length)
 
-  hunter = rngPerson.name
-}
+//   const rngPerson = people[rngPersonIndex]
+
+//   hunter = rngPerson.name
+// }
 
 // !SECTION
 
 
+// SECTION startup functions 
+
+draw()
+
+
+// !SECTION
