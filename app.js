@@ -2,11 +2,6 @@
 
 // SECTION global variables
 
-const btn1 = document.getElementById('btn1')
-const btn2 = document.getElementById('btn2')
-const btn3 = document.getElementById('btn3')
-const btn4 = document.getElementById('btn4')
-const btn5 = document.getElementById('btn5')
 
 
 const locations = [
@@ -79,16 +74,6 @@ let hours = 8
 
 
 // // !SECTION
-// @ts-ignore
-btn1.addEventListener('click', bite)
-// @ts-ignore
-btn2.addEventListener('click', bite)
-// @ts-ignore
-btn3.addEventListener('click', bite)
-// @ts-ignore
-btn4.addEventListener('click', bite)
-// @ts-ignore
-btn5.addEventListener('click', bite)
 
 
 
@@ -99,25 +84,25 @@ function draw() {
 
   locations.forEach(location => {
     const filteredPeople = people.filter(p => p.location == location)
+    const locationElem = document.getElementById(location)
     console.log(filteredPeople)
 
-    const emojis = filteredPeople.map(person => person.picture)
-
-    const locationElem = document.getElementById(location)
-
     // @ts-ignore
-    locationElem.innerText = ''
-    emojis.forEach(emoji => {
+    locationElem.innerText = '';
+    // @ts-ignore
+    filteredPeople.forEach(person => {
       // @ts-ignore
-      locationElem.innerText += emoji
+      locationElem.innerText += person.picture
     })
+
   })
-
-
 }
 
-function bite(event) {
-  const victims = event.target.innerText
+
+
+
+function bite(location) {
+  const victims = location;
   console.log(victims)
 
   const victimsLocated = people.filter(p => p.location == victims)
